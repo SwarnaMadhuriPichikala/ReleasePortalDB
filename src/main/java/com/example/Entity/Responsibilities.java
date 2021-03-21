@@ -1,19 +1,22 @@
 package com.example.Entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Responsibilities {
     @Id
-    private int  resp_id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer  resp_id;
     private String responsibilityname;
 
-    public int getResp_id() {
+    public Integer getResp_id() {
         return resp_id;
     }
 
-    public void setResp_id(int resp_id) {
+    public void setResp_id(Integer resp_id) {
         this.resp_id = resp_id;
     }
 
@@ -23,5 +26,13 @@ public class Responsibilities {
 
     public void setResponsibilityname(String responsibilityname) {
         this.responsibilityname = responsibilityname;
+    }
+
+    @Override
+    public String toString() {
+        return "Responsibilities{" +
+                "resp_id=" + resp_id +
+                ", responsibilityname='" + responsibilityname + '\'' +
+                '}';
     }
 }

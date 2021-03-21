@@ -1,23 +1,30 @@
 package com.example.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Roles {
     @Id
-    private  int role_id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private  Integer role_id;
     private  String RoleName;
 
+    @ManyToMany
+    @JoinTable(
+            name="UsersRoles",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name="user_id")
+    )
+
     public Roles() {
-        
+
     }
 
-    public int getRole_id() {
+    public Integer getRole_id() {
         return role_id;
     }
 
-    public void setRole_id(int role_id) {
+    public void setRole_id(Integer role_id) {
         this.role_id = role_id;
     }
 
@@ -29,8 +36,16 @@ public class Roles {
         RoleName = roleName;
     }
 
-    public Roles(int role_id, String roleName) {
+    public Roles(Integer role_id, String roleName) {
         this.role_id = role_id;
         RoleName = roleName;
+    }
+
+    @Override
+    public String toString() {
+        return "Roles{" +
+                "role_id=" + role_id +
+                ", RoleName='" + RoleName + '\'' +
+                '}';
     }
 }

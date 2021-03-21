@@ -1,25 +1,41 @@
 package com.example.Entity;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
+import javax.persistence.*;
 @Entity
+// @Table(name = "Employee_table") This is optional
 public class User {
     @Id
-    private int user_id;
+    // @GeneratedValue(strategy = GenerationType.AUTO) This is used when ID has to be auto generated.
+    //@Column(name = "employeeid") added to create column name with given
+    private Integer user_id;
     private String EmpName;
     private String email;
     private String employeepassword;
+    @ManyToMany
+    @JoinTable(
+            name="UsersRoles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name="role_id")
+    )
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "user_id=" + user_id +
+                ", EmpName='" + EmpName + '\'' +
+                ", email='" + email + '\'' +
+                ", employeepassword='" + employeepassword + '\'' +
+                '}';
+    }
 
     public User() {
 
     }
 
-    public int getUser_id() {
+    public Integer getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
 
@@ -47,7 +63,7 @@ public class User {
         this.employeepassword = employeepassword;
     }
 
-    public User(int user_id, String empName, String email, String employeepassword) {
+    public User(Integer user_id, String empName, String email, String employeepassword) {
         this.user_id = user_id;
         EmpName = empName;
         this.email = email;
